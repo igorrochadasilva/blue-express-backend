@@ -110,6 +110,6 @@ $ docker-compose stop
 $ docker-compose down
 ```
 
-- ORM: Prisma
+- ORM: TypeOrm
 - Deploy Environment: Aws.
 - Authentication and Authorization: Jwt.
