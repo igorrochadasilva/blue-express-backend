@@ -76,6 +76,12 @@ Nest is [MIT licensed](LICENSE).
 
 - programming language: Typescript.
 
+# Environment
+
+- installed dependencies:
+- dotenv
+- @nestjs/config: used to configure the env file.
+
 # database: Postgres
 
 - Used docker to create a local environment to develop the database and make tests.
@@ -90,6 +96,8 @@ $ docker run -d -e POSTGRES_DB=mydb -e POSTGRES_PASSWORD=testpass123 -e POSTGRES
 
 ```bash
 # Docker commands:
+# Create containers and rerunned npm install.
+$ docker-compose up --build
 # Create containers.
 $ docker-compose up
 # Only performs the build stage of the images that will be used
