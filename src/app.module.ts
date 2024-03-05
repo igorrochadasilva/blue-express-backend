@@ -1,14 +1,16 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: process.env.ENV === 'test' ? '.env.test' : '.env',
     }),
+    forwardRef(() => UserModule),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,

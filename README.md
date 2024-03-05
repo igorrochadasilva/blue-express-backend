@@ -81,6 +81,8 @@ Nest is [MIT licensed](LICENSE).
 - installed dependencies:
 - dotenv
 - @nestjs/config: used to configure the env file.
+- class-validator: used to validate the class entity.
+- bcrypt: used to encrypt and decrypt.
 
 # database: Postgres
 
