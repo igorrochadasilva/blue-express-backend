@@ -19,7 +19,20 @@ export class UserService {
   ) {}
 
   async create(data: CreateUserDTO) {
-    return { message: 'Create' };
+    const existsUser = await this.usersRepository.exists({
+      where: { email: data.email },
+    });
+
+    if (existsUser) {
+      throw new BadRequestException('This e-mail already exists');
+    }
+
+    const user = await this.usersRepository.save(data);
+
+    return {
+      message: 'Created user',
+      user,
+    };
   }
 
   async list() {

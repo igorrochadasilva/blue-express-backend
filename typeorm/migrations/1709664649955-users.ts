@@ -31,6 +31,16 @@ export class Users1709664649955 implements MigrationInterface {
             length: '127',
           },
           {
+            name: 'department',
+            type: 'varchar',
+            length: '127',
+          },
+          {
+            name: 'position',
+            type: 'varchar',
+            length: '127',
+          },
+          {
             name: 'birthAt',
             type: 'date',
             isNullable: true,

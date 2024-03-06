@@ -21,7 +21,8 @@ export class CreateUserDTO {
     minSymbols: 0,
   })
   password: string;
-
+  department: string;
+  position: string;
   @IsOptional()
   @IsDateString()
   birthAt?: string;

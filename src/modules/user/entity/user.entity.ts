@@ -29,11 +29,11 @@ export class UserEntity {
   @Column({
     length: 128,
   })
-  Department: string;
+  department: string;
   @Column({
     length: 128,
   })
-  Position: string;
+  position: string;
   @Column({
     type: 'date',
     nullable: true,
