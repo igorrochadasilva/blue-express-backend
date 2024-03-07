@@ -27,6 +27,10 @@ export class UserService {
       throw new BadRequestException('This e-mail already exists');
     }
 
+    const salt = await bcrypt.genSalt();
+
+    data.password = await bcrypt.hash(data.password, salt);
+
     const user = await this.usersRepository.save(data);
 
     return {
@@ -60,6 +64,32 @@ export class UserService {
     }: UpdatePutUserDTO,
   ) {
     await this.exists(id);
+
+    const userUpdateData = {
+      name,
+      password,
+      department,
+      position,
+      email,
+      role,
+      birthAt,
+    };
+
+    const emptyFields = Object.entries(userUpdateData)
+      .filter(
+        ([key, value]) => value === null || value === undefined || value === '',
+      )
+      .map(([key]) => key);
+
+    if (emptyFields.length > 0) {
+      throw new BadRequestException(
+        `Empty fields are not allowed: ${emptyFields.join(', ')}.`,
+      );
+    }
+
+    const salt = await bcrypt.genSalt();
+
+    password = await bcrypt.hash(password, salt);
 
     await this.usersRepository.update(id, {
       name,
@@ -97,7 +127,8 @@ export class UserService {
       data.name = name;
     }
     if (password) {
-      data.password = password;
+      const salt = await bcrypt.genSalt();
+      data.password = await bcrypt.hash(password, salt);
     }
     if (department) {
       data.department = department;
