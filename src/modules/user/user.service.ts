@@ -36,28 +36,101 @@ export class UserService {
   }
 
   async list() {
-    return { message: 'list' };
+    return this.usersRepository.find();
   }
 
   async show(id: number) {
-    return { message: 'show' };
+    await this.exists(id);
+
+    return this.usersRepository.findOneBy({
+      id,
+    });
   }
 
   async update(
     id: number,
-    { birthAt, name, password, email, role }: UpdatePutUserDTO,
+    {
+      birthAt,
+      name,
+      password,
+      department,
+      position,
+      email,
+      role,
+    }: UpdatePutUserDTO,
   ) {
-    return { message: 'update' };
+    await this.exists(id);
+
+    await this.usersRepository.update(id, {
+      name,
+      password,
+      department,
+      position,
+      email,
+      birthAt: birthAt ? new Date(birthAt) : null,
+      role,
+    });
+
+    return this.show(id);
   }
 
   async updatePartial(
     id: number,
-    { birthAt, name, password, email, role }: UpdatePatchUserDTO,
+    {
+      birthAt,
+      name,
+      password,
+      department,
+      position,
+      email,
+      role,
+    }: UpdatePatchUserDTO,
   ) {
-    return { message: 'updatePartial' };
+    await this.exists(id);
+
+    const data: any = {};
+
+    if (birthAt) {
+      data.birthAt = new Date(birthAt);
+    }
+    if (name) {
+      data.name = name;
+    }
+    if (password) {
+      data.password = password;
+    }
+    if (department) {
+      data.department = department;
+    }
+    if (position) {
+      data.position = position;
+    }
+    if (email) {
+      data.email = email;
+    }
+
+    if (role) {
+      data.role = role;
+    }
+
+    await this.usersRepository.update(id, data);
+
+    return this.show(id);
   }
 
   async delete(id: number) {
-    return { message: 'delete' };
+    await this.exists(id);
+
+    await this.usersRepository.delete(id);
+
+    return true;
+  }
+
+  async exists(id: number) {
+    const user = await this.usersRepository.exists({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(`User ${id} does't exist.`);
+    }
   }
 }
