@@ -83,6 +83,7 @@ Nest is [MIT licensed](LICENSE).
 - @nestjs/config: used to configure the env file.
 - class-validator: used to validate the class entity.
 - bcrypt: used to encrypt and decrypt.
+- class-transformer: allows you to transform plain object to some instance of class and versa. Also it allows to serialize / deserialize object based on criteria.
 
 # database: Postgres
 

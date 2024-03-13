@@ -13,9 +13,7 @@ const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   migrations: [`${__dirname}/migrations/**/*.ts`],
-  synchronize: true,
-  logging: true,
-  subscribers: [],
+  synchronize: false,
 });
 
 export default AppDataSource;

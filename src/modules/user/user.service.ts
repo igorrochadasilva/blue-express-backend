@@ -33,10 +33,7 @@ export class UserService {
 
     const user = await this.usersRepository.save(data);
 
-    return {
-      message: 'Created user',
-      user,
-    };
+    return user;
   }
 
   async list() {
