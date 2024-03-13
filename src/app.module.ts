@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { UserEntity } from './modules/user/entity/user.entity';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UserEntity } from './modules/user/entity/user.entity';
       envFilePath: process.env.ENV === 'test' ? '.env.test' : '.env',
     }),
     forwardRef(() => UserModule),
+    forwardRef(() => AuthModule),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
