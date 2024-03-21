@@ -4,8 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
-import { UserEntity } from './modules/user/entity/user.entity';
 import { AuthModule } from './modules/auth/auth.module';
+import { typeOrmConfig } from './config/data-source';
 
 @Module({
   imports: [
@@ -14,17 +14,7 @@ import { AuthModule } from './modules/auth/auth.module';
     }),
     forwardRef(() => UserModule),
     forwardRef(() => AuthModule),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      entities: [UserEntity],
-      synchronize: true,
-      autoLoadEntities: true,
-    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
   ],
   controllers: [AppController],
   providers: [AppService],

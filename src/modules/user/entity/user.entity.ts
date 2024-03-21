@@ -2,10 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from '../../../enums/role.enum';
+import { ApproverEntity } from '../../approvers/entity/approvers.entity';
+import { MaintenanceContractsEntity } from '../../maintenance-contracts/entity/maintenance-contracts.entity';
 
 @Entity({
   name: 'users',
@@ -47,4 +50,12 @@ export class UserEntity {
     default: Role.User,
   })
   role: number;
+  @OneToMany(() => ApproverEntity, (approver) => approver.user)
+  approvers: ApproverEntity[];
+
+  @OneToMany(
+    () => MaintenanceContractsEntity,
+    (maintenanceContracts) => maintenanceContracts.user,
+  )
+  maintenanceContracts: MaintenanceContractsEntity[];
 }
