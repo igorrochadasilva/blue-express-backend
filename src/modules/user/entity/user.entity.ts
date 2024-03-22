@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Role } from '../../../enums/role.enum';
 import { ApproverEntity } from '../../approvers/entity/approvers.entity';
-import { MaintenanceContractsEntity } from '../../maintenance-contracts/entity/maintenance-contracts.entity';
+import { MaintenanceContractEntity } from '../../maintenance-contract/entity/maintenance-contract.entity';
 
 @Entity({
   name: 'users',
@@ -54,8 +54,8 @@ export class UserEntity {
   approvers: ApproverEntity[];
 
   @OneToMany(
-    () => MaintenanceContractsEntity,
-    (maintenanceContracts) => maintenanceContracts.user,
+    () => MaintenanceContractEntity,
+    (maintenanceContract) => maintenanceContract.requester,
   )
-  maintenanceContracts: MaintenanceContractsEntity[];
+  maintenanceContract: MaintenanceContractEntity[];
 }

@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { typeOrmConfig } from './config/data-source';
+import { MaintenanceContractModule } from './modules/maintenance-contract/maintenance-contract.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { typeOrmConfig } from './config/data-source';
     }),
     forwardRef(() => UserModule),
     forwardRef(() => AuthModule),
+    forwardRef(() => MaintenanceContractModule),
     TypeOrmModule.forRoot(typeOrmConfig),
   ],
   controllers: [AppController],

@@ -12,7 +12,7 @@ import { ApproverEntity } from '../../approvers/entity/approvers.entity';
 @Entity({
   name: 'maintenance_contracts',
 })
-export class MaintenanceContractsEntity {
+export class MaintenanceContractEntity {
   @PrimaryGeneratedColumn({
     unsigned: true,
   })
@@ -24,10 +24,9 @@ export class MaintenanceContractsEntity {
     nullable: false,
   })
   title: string;
-  default: 'maintenance_contract';
 
   @ManyToOne(() => UserEntity, (user) => user.approvers)
-  user: UserEntity;
+  requester: UserEntity;
 
   @Column({
     type: 'varchar',
@@ -46,7 +45,7 @@ export class MaintenanceContractsEntity {
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   clmLineNumber: string;
 
@@ -103,22 +102,13 @@ export class MaintenanceContractsEntity {
   })
   scope: string;
 
-  @Column({
-    type: 'decimal',
-    nullable: false,
-  })
+  @Column({ type: 'integer', nullable: false })
   contractTotalValue: number;
 
-  @Column({
-    type: 'decimal',
-    nullable: false,
-  })
-  dollarQuote: number;
+  @Column({ type: 'decimal', nullable: false })
+  dollarExchangeRate: number;
 
-  @Column({
-    type: 'decimal',
-    nullable: false,
-  })
+  @Column({ type: 'decimal', nullable: false })
   totalValueUSD: number;
 
   @Column({
@@ -239,35 +229,35 @@ export class MaintenanceContractsEntity {
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   phone: string;
 
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   contact: string;
 
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   antiCorruption: string;
 
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   uf: string;
 
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
   })
   sap: string;
 
