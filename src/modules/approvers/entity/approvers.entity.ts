@@ -9,7 +9,7 @@ import { UserEntity } from '../../user/entity/user.entity';
 import { RequestsTypeEnums } from '../../../enums/request-types.enum';
 import { CompaniesEnums } from '../../../enums/companies.enum';
 import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
-import { MaintenanceContractsEntity } from '../../maintenance-contracts/entity/maintenance-contracts.entity';
+import { MaintenanceContractEntity } from '../../maintenance-contract/entity/maintenance-contract.entity';
 
 @Entity({
   name: 'approvers',
@@ -40,8 +40,8 @@ export class ApproverEntity {
   user: UserEntity;
 
   @OneToMany(
-    () => MaintenanceContractsEntity,
+    () => MaintenanceContractEntity,
     (maintenanceContracts) => maintenanceContracts.currentApprover,
   )
-  maintenanceContracts: MaintenanceContractsEntity[];
+  maintenanceContracts: MaintenanceContractEntity[];
 }

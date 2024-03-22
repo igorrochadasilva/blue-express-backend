@@ -2,7 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import { UserEntity } from '../modules/user/entity/user.entity';
 import { ApproverEntity } from '../modules/approvers/entity/approvers.entity';
-import { MaintenanceContractsEntity } from '../modules/maintenance-contracts/entity/maintenance-contracts.entity';
+import { MaintenanceContractEntity } from '../modules/maintenance-contract/entity/maintenance-contract.entity';
 
 dotenv.config({
   path: process.env.ENV === 'test' ? '.env.test' : '.env',
@@ -15,7 +15,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [UserEntity, ApproverEntity, MaintenanceContractsEntity],
+  entities: [UserEntity, ApproverEntity, MaintenanceContractEntity],
   synchronize: true,
   autoLoadEntities: true,
 };
