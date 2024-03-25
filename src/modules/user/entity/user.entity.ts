@@ -18,25 +18,31 @@ export class UserEntity {
     unsigned: true,
   })
   id: number;
+
   @Column({
     length: 63,
   })
   name: string;
+
   @Column({
     length: 128,
     unique: true,
   })
   email: string;
+
   @Column()
   password: string;
+
   @Column({
     length: 128,
   })
   department: string;
+
   @Column({
     length: 128,
   })
   position: string;
+
   @Column({
     type: 'date',
     nullable: true,
@@ -50,6 +56,7 @@ export class UserEntity {
     default: Role.User,
   })
   role: number;
+
   @OneToMany(() => ApproverEntity, (approver) => approver.user)
   approvers: ApproverEntity[];
 
@@ -58,4 +65,7 @@ export class UserEntity {
     (maintenanceContract) => maintenanceContract.requester,
   )
   maintenanceContract: MaintenanceContractEntity[];
+
+  @OneToMany(() => ApproverEntity, (approval) => approval.user)
+  approvals: ApproverEntity[];
 }

@@ -74,7 +74,7 @@ export class ApproverService {
     });
 
     if (!user) {
-      throw new NotFoundException(`User ${id} does't exist.`);
+      throw new NotFoundException(`Approver ${id} does't exist.`);
     }
   }
 }

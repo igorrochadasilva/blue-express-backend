@@ -66,7 +66,7 @@ export class MaintenanceContractService {
     });
 
     if (!user) {
-      throw new NotFoundException(`User ${id} does't exist.`);
+      throw new NotFoundException(`Maintenance Contract ${id} does't exist.`);
     }
   }
 }
