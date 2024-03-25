@@ -11,10 +11,15 @@ import {
   Min,
 } from 'class-validator';
 import { UserEntity } from '../../user/entity/user.entity';
+import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
+import { TypeContractEnums } from '../../../enums/type-contract.enum';
+import { CompaniesEnums } from '../../../enums/companies.enum';
+import { RequestStatusEnums } from '../../../enums/request-status.enum';
+import { RequestFrequencyEnums } from '../../../enums/request-frequency.enum';
 
 export class CreateMaintenanceContractDTO {
   @IsString()
-  title;
+  title: string;
   @IsString()
   clientName: string;
   @IsString()
@@ -22,20 +27,20 @@ export class CreateMaintenanceContractDTO {
   @IsString()
   @IsOptional()
   clmLineNumber: string;
-  @IsString()
-  typeContract: string;
-  @IsString()
-  company: string;
-  @IsString()
-  status: string;
+  @IsEnum(TypeContractEnums)
+  typeContract: TypeContractEnums;
+  @IsEnum(CompaniesEnums)
+  company: CompaniesEnums;
+  @IsEnum(RequestStatusEnums)
+  status: RequestStatusEnums;
   @IsDateString()
   renewStartDate: string;
   @IsDateString()
   renewEndDate: string;
   @IsNumber()
   contractRenewQtd: number;
-  @IsString()
-  frequency: string;
+  @IsEnum(RequestFrequencyEnums)
+  frequency: RequestFrequencyEnums;
   @IsString()
   scope: string;
   @IsNumber({
@@ -96,8 +101,8 @@ export class CreateMaintenanceContractDTO {
   requester: UserEntity;
   @IsNumber()
   currentLevel: number;
-  @IsString()
-  approvalLevel: string;
+  @IsEnum(OfficeTypeEnum)
+  approvalLevel: OfficeTypeEnum;
   @IsOptional()
   @IsPhoneNumber()
   phone: string;

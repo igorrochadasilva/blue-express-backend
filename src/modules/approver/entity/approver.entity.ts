@@ -18,8 +18,11 @@ export class ApproverEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
-  user_id: number;
+  @Column({ type: 'varchar', nullable: false })
+  title: string;
+
+  @ManyToOne(() => UserEntity, (user) => user.approvers)
+  user: UserEntity;
 
   @Column({ nullable: false })
   level: number;
@@ -30,14 +33,11 @@ export class ApproverEntity {
   @Column({ type: 'enum', enum: CompaniesEnums, nullable: false })
   company: CompaniesEnums;
 
-  @Column({ type: 'enum', enum: CompaniesEnums, nullable: false })
+  @Column({ type: 'enum', enum: OfficeTypeEnum, nullable: false })
   office: OfficeTypeEnum;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+  @Column({ type: 'decimal', nullable: false })
   competence: number;
-
-  @ManyToOne(() => UserEntity, (user) => user.approvers)
-  user: UserEntity;
 
   @OneToMany(
     () => MaintenanceContractEntity,

@@ -7,7 +7,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from '../../user/entity/user.entity';
-import { ApproverEntity } from '../../approvers/entity/approvers.entity';
+import { ApproverEntity } from '../../approver/entity/approver.entity';
+import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
+import { TypeContractEnums } from '../../../enums/type-contract.enum';
+import { CompaniesEnums } from '../../../enums/companies.enum';
+import { RequestStatusEnums } from '../../../enums/request-status.enum';
+import { RequestFrequencyEnums } from '../../../enums/request-frequency.enum';
 
 @Entity({
   name: 'maintenance_contracts',
@@ -49,26 +54,14 @@ export class MaintenanceContractEntity {
   })
   clmLineNumber: string;
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-  })
-  typeContract: string;
+  @Column({ type: 'enum', enum: TypeContractEnums, nullable: false })
+  typeContract: TypeContractEnums;
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-  })
-  company: string;
+  @Column({ type: 'enum', enum: CompaniesEnums, nullable: false })
+  company: CompaniesEnums;
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-  })
-  status: string;
+  @Column({ type: 'enum', enum: RequestStatusEnums, nullable: false })
+  status: RequestStatusEnums;
 
   @Column({
     type: 'date',
@@ -88,12 +81,8 @@ export class MaintenanceContractEntity {
   })
   contractRenewQtd: number;
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-  })
-  frequency: string;
+  @Column({ type: 'enum', enum: RequestFrequencyEnums, nullable: false })
+  frequency: RequestFrequencyEnums;
 
   @Column({
     type: 'varchar',
@@ -219,12 +208,8 @@ export class MaintenanceContractEntity {
   })
   author: string;
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-  })
-  approvalLevel: string;
+  @Column({ type: 'enum', enum: OfficeTypeEnum, nullable: false })
+  approvalLevel: OfficeTypeEnum;
 
   @Column({
     type: 'varchar',

@@ -7,6 +7,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { typeOrmConfig } from './config/data-source';
 import { MaintenanceContractModule } from './modules/maintenance-contract/maintenance-contract.module';
+import { ApproverModule } from './modules/approver/approver.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { MaintenanceContractModule } from './modules/maintenance-contract/mainte
     forwardRef(() => UserModule),
     forwardRef(() => AuthModule),
     forwardRef(() => MaintenanceContractModule),
+    forwardRef(() => ApproverModule),
     TypeOrmModule.forRoot(typeOrmConfig),
   ],
   controllers: [AppController],

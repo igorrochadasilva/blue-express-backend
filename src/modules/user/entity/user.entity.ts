@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from '../../../enums/role.enum';
-import { ApproverEntity } from '../../approvers/entity/approvers.entity';
+import { ApproverEntity } from '../../approver/entity/approver.entity';
 import { MaintenanceContractEntity } from '../../maintenance-contract/entity/maintenance-contract.entity';
 
 @Entity({
