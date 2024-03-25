@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import { UserEntity } from '../modules/user/entity/user.entity';
-import { ApproverEntity } from '../modules/approvers/entity/approvers.entity';
+import { ApproverEntity } from '../modules/approver/entity/approver.entity';
 import { MaintenanceContractEntity } from '../modules/maintenance-contract/entity/maintenance-contract.entity';
 
 dotenv.config({
