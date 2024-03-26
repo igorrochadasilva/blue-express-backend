@@ -5,6 +5,7 @@ import { ApproverEntity } from '../modules/approver/entity/approver.entity';
 import { MaintenanceContractEntity } from '../modules/maintenance-contract/entity/maintenance-contract.entity';
 import { ApprovalEntity } from '../modules/approval/entity/approval.entity';
 import { DistributorRepresentativesContractEntity } from '../modules/distributor-representatives-contract/entity/distributor-representatives-contract.entity';
+import { SoftwareServiceContractEntity } from '../modules/software-service-contract/entity/software-service-contract.entity';
 
 dotenv.config({
   path: process.env.ENV === 'test' ? '.env.test' : '.env',
@@ -22,6 +23,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     ApproverEntity,
     MaintenanceContractEntity,
     DistributorRepresentativesContractEntity,
+    SoftwareServiceContractEntity,
     ApprovalEntity,
   ],
   synchronize: true,

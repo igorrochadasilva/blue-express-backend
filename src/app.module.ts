@@ -10,6 +10,7 @@ import { MaintenanceContractModule } from './modules/maintenance-contract/mainte
 import { ApproverModule } from './modules/approver/approver.module';
 import { ApprovalModule } from './modules/approval/approval.module';
 import { DistributorRepresentativesContractModule } from './modules/distributor-representatives-contract/distributor-representatives-contract.module';
+import { SoftwareServiceContractModule } from './modules/software-service-contract/software-service-contract.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DistributorRepresentativesContractModule } from './modules/distributor-
     forwardRef(() => ApproverModule),
     forwardRef(() => MaintenanceContractModule),
     forwardRef(() => DistributorRepresentativesContractModule),
+    forwardRef(() => SoftwareServiceContractModule),
     forwardRef(() => ApprovalModule),
     TypeOrmModule.forRoot(typeOrmConfig),
   ],
