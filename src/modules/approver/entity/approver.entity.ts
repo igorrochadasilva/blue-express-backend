@@ -11,6 +11,7 @@ import { CompaniesEnums } from '../../../enums/companies.enum';
 import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
 import { MaintenanceContractEntity } from '../../maintenance-contract/entity/maintenance-contract.entity';
 import { DistributorRepresentativesContractEntity } from '../../distributor-representatives-contract/entity/distributor-representatives-contract.entity';
+import { SoftwareServiceContractEntity } from '../../software-service-contract/entity/software-service-contract.entity';
 
 @Entity({
   name: 'approvers',
@@ -52,4 +53,10 @@ export class ApproverEntity {
       distributorRepresentativesContract.currentApprover,
   )
   distributorRepresentativesContract: DistributorRepresentativesContractEntity[];
+
+  @OneToMany(
+    () => SoftwareServiceContractEntity,
+    (softwareServiceContract) => softwareServiceContract.currentApprover,
+  )
+  softwareServiceContract: SoftwareServiceContractEntity[];
 }
