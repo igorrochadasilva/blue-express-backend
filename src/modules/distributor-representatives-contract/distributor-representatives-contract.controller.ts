@@ -6,8 +6,10 @@ import {
   Patch,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ParamId } from '../../decorators/param-id-decorator';
+import { AuthGuard } from '../../guards/auth.guard';
 import { DistributorRepresentativesContractService } from './distributor-representatives-contract.service';
 import { CreateDistributorRepresentativesContractDTO } from './dto/create-distributor-representatives-contract.dto';
 import { UpdatePutDistributorRepresentativesContractDTO } from './dto/update-put-distributor-representatives-contract.dto';

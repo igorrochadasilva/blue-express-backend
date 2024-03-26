@@ -11,11 +11,11 @@ import { ApproverEntity } from '../../approver/entity/approver.entity';
 import { TypeContractEnums } from '../../../enums/type-contract.enum';
 import { CompaniesEnums } from '../../../enums/companies.enum';
 import { RequestStatusEnums } from '../../../enums/request-status.enum';
-import { TypeRepresentativeDistributorEnum } from '../../../enums/request-representative-distributor.enum';
 import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
+import { TypeRequestOrderEnum } from '../../../enums/type-request-order.enum';
 
 @Entity({
-  name: 'distributor_representatives_contracts',
+  name: 'distributor_representative_contracts',
 })
 export class DistributorRepresentativesContractEntity {
   @PrimaryGeneratedColumn({
@@ -32,10 +32,10 @@ export class DistributorRepresentativesContractEntity {
 
   @Column({
     type: 'enum',
-    enum: TypeRepresentativeDistributorEnum,
+    enum: TypeRequestOrderEnum,
     nullable: false,
   })
-  typeRepresentativeDistributor: TypeRepresentativeDistributorEnum;
+  typeRequestOrder: TypeRequestOrderEnum;
 
   @Column({
     type: 'varchar',

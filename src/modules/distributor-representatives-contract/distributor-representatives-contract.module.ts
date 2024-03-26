@@ -1,13 +1,13 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../auth/auth.module';
+import { UserModule } from '../user/user.module';
+import { ApproverModule } from '../approver/approver.module';
+import { UserEntity } from '../user/entity/user.entity';
+import { ApproverEntity } from '../approver/entity/approver.entity';
 import { DistributorRepresentativesContractEntity } from './entity/distributor-representatives-contract.entity';
 import { DistributorRepresentativesContractController } from './distributor-representatives-contract.controller';
 import { DistributorRepresentativesContractService } from './distributor-representatives-contract.service';
-import { UserModule } from '../user/user.module';
-import { UserEntity } from '../user/entity/user.entity';
-import { ApproverModule } from '../approver/approver.module';
-import { ApproverEntity } from '../approver/entity/approver.entity';
 
 @Module({
   imports: [
