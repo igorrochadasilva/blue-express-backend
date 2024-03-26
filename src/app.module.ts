@@ -9,6 +9,7 @@ import { typeOrmConfig } from './config/data-source';
 import { MaintenanceContractModule } from './modules/maintenance-contract/maintenance-contract.module';
 import { ApproverModule } from './modules/approver/approver.module';
 import { ApprovalModule } from './modules/approval/approval.module';
+import { DistributorRepresentativesContractModule } from './modules/distributor-representatives-contract/distributor-representatives-contract.module';
 
 @Module({
   imports: [
@@ -17,8 +18,9 @@ import { ApprovalModule } from './modules/approval/approval.module';
     }),
     forwardRef(() => UserModule),
     forwardRef(() => AuthModule),
-    forwardRef(() => MaintenanceContractModule),
     forwardRef(() => ApproverModule),
+    forwardRef(() => MaintenanceContractModule),
+    forwardRef(() => DistributorRepresentativesContractModule),
     forwardRef(() => ApprovalModule),
     TypeOrmModule.forRoot(typeOrmConfig),
   ],

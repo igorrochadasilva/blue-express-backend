@@ -10,15 +10,44 @@ import { MaintenanceContractEntity } from './entity/maintenance-contract.entity'
 import { CreateMaintenanceContractDTO } from './dto/create-maintenance-contract.dto';
 import { UpdatePutMaintenanceContractDTO } from './dto/update-put-maintenance-contract.dto';
 import { UpdatePatchMaintenanceContractDTO } from './dto/update-patch-maintenance-contract.dto';
+import { UserEntity } from '../user/entity/user.entity';
+import { ApproverEntity } from '../approver/entity/approver.entity';
 
 @Injectable()
 export class MaintenanceContractService {
   constructor(
     @InjectRepository(MaintenanceContractEntity)
     private maintenanceContractRepository: Repository<MaintenanceContractEntity>,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
+    @InjectRepository(ApproverEntity)
+    private approversRepository: Repository<ApproverEntity>,
   ) {}
 
   async create(data: CreateMaintenanceContractDTO) {
+    const requesterId: any = data.requester.id || data.requester;
+    const approverId: any = data.currentApprover.id || data.currentApprover;
+
+    const requesterExists = await this.usersRepository.exists({
+      where: {
+        id: requesterId,
+      },
+    });
+
+    const approverExists = await this.approversRepository.exists({
+      where: {
+        id: approverId,
+      },
+    });
+
+    if (!requesterExists) {
+      throw new BadRequestException('The requester does not exist.');
+    }
+
+    if (!approverExists) {
+      throw new BadRequestException('The current approver does not exist.');
+    }
+
     const request = await this.maintenanceContractRepository.save(data);
 
     return request;
