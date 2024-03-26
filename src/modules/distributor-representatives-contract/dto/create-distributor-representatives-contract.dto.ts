@@ -12,16 +12,16 @@ import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
 import { TypeContractEnums } from '../../../enums/type-contract.enum';
 import { CompaniesEnums } from '../../../enums/companies.enum';
 import { RequestStatusEnums } from '../../../enums/request-status.enum';
-import { TypeRepresentativeDistributorEnum } from '../../../enums/request-representative-distributor.enum';
 import { UserEntity } from '../../user/entity/user.entity';
 import { ApproverEntity } from '../../approver/entity/approver.entity';
+import { TypeRequestOrderEnum } from '../../../enums/type-request-order.enum';
 
 export class CreateDistributorRepresentativesContractDTO {
   @IsString()
   title: string;
 
-  @IsEnum(TypeRepresentativeDistributorEnum)
-  typeRepresentativeDistributor: TypeRepresentativeDistributorEnum;
+  @IsEnum(TypeRequestOrderEnum)
+  typeRepresentativeDistributor: TypeRequestOrderEnum;
 
   @IsString()
   nameRepresentativeDistributor: string;
@@ -29,11 +29,12 @@ export class CreateDistributorRepresentativesContractDTO {
   @IsEnum(CompaniesEnums)
   company: CompaniesEnums;
 
-  @IsEmail()
+  @IsString()
   @IsOptional()
   contact: string;
 
   @IsString()
+  @IsOptional()
   vendor: string;
 
   @IsPhoneNumber('BR')
@@ -48,27 +49,35 @@ export class CreateDistributorRepresentativesContractDTO {
   clmLineNumber: string;
 
   @IsDateString()
-  startContractDate: string;
+  startContractDate: Date;
 
   @IsDateString()
-  endContractDate: string;
+  endContractDate: Date;
 
-  @IsNumber()
+  @IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 5,
+  })
   commissionPercentage: number;
 
   @IsString()
+  @IsOptional()
   manager: string;
 
   @IsString()
+  @IsOptional()
   uf: string;
 
   @IsString()
   observation: string;
 
   @IsString()
+  @IsOptional()
   activity: string;
 
   @IsString()
+  @IsOptional()
   antiCorruption: string;
 
   @IsEnum(TypeContractEnums)
@@ -77,6 +86,9 @@ export class CreateDistributorRepresentativesContractDTO {
   @IsString()
   requestId: string;
 
+  @IsDefined()
+  requester: UserEntity;
+
   @IsNumber()
   currentLevel: number;
 
@@ -84,14 +96,11 @@ export class CreateDistributorRepresentativesContractDTO {
   status: RequestStatusEnums;
 
   @IsDateString()
-  approvalDate: string;
-
-  @IsEnum(OfficeTypeEnum)
-  approvalLevel: OfficeTypeEnum;
-
-  @IsDefined()
-  requester: UserEntity;
+  approvalDate: Date;
 
   @IsDefined()
   currentApprover: ApproverEntity;
+
+  @IsEnum(OfficeTypeEnum)
+  approvalLevel: OfficeTypeEnum;
 }

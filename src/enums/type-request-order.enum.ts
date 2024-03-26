@@ -1,4 +1,4 @@
-export enum TypeRepresentativeDistributorEnum {
+export enum TypeRequestOrderEnum {
   representative = 'representative',
   distributor = 'distributor',
 }

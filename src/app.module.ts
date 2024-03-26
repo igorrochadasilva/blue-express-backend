@@ -11,6 +11,8 @@ import { ApproverModule } from './modules/approver/approver.module';
 import { ApprovalModule } from './modules/approval/approval.module';
 import { DistributorRepresentativesContractModule } from './modules/distributor-representatives-contract/distributor-representatives-contract.module';
 import { SoftwareServiceContractModule } from './modules/software-service-contract/software-service-contract.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { mailerConfig } from './email/mailer-source';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { SoftwareServiceContractModule } from './modules/software-service-contra
     forwardRef(() => DistributorRepresentativesContractModule),
     forwardRef(() => SoftwareServiceContractModule),
     forwardRef(() => ApprovalModule),
+    //MailerModule used to send email
+    MailerModule.forRoot(mailerConfig),
     TypeOrmModule.forRoot(typeOrmConfig),
   ],
   controllers: [AppController],

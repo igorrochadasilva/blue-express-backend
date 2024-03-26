@@ -13,6 +13,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserService } from '../user/user.service';
 import { UserEntity } from '../user/entity/user.entity';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,7 @@ export class AuthService {
 
   constructor(
     private readonly jwtService: JwtService,
+    private readonly mailer: MailerService,
     private readonly userService: UserService,
     @InjectRepository(UserEntity)
     private usersRepository: Repository<UserEntity>,
@@ -82,7 +84,39 @@ export class AuthService {
     return this.createToken(user);
   }
 
-  async forget(email: string) {}
+  async forget(email: string) {
+    const user = await this.usersRepository.findOneBy({
+      email,
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('Email is wrong.');
+    }
+
+    const token = this.jwtService.sign(
+      {
+        id: user.id,
+      },
+      {
+        expiresIn: '1 days',
+        subject: String(user.id),
+        issuer: 'forget',
+        audience: 'users',
+      },
+    );
+
+    await this.mailer.sendMail({
+      subject: 'Password Recovery',
+      to: 'igor082011@gmail.com',
+      template: 'forget',
+      context: {
+        name: user.name,
+        token,
+      },
+    });
+
+    return { success: true };
+  }
 
   async reset(password: string, token: string) {
     try {

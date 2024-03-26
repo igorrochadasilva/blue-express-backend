@@ -5,12 +5,12 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UserEntity } from '../user/entity/user.entity';
+import { ApproverEntity } from '../approver/entity/approver.entity';
 import { DistributorRepresentativesContractEntity } from './entity/distributor-representatives-contract.entity';
 import { CreateDistributorRepresentativesContractDTO } from './dto/create-distributor-representatives-contract.dto';
 import { UpdatePutDistributorRepresentativesContractDTO } from './dto/update-put-distributor-representatives-contract.dto';
 import { UpdatePatchDistributorRepresentativesContractDTO } from './dto/update-patch-distributor-representatives-contract.dto';
-import { UserEntity } from '../user/entity/user.entity';
-import { ApproverEntity } from '../approver/entity/approver.entity';
 
 @Injectable()
 export class DistributorRepresentativesContractService {
@@ -104,7 +104,7 @@ export class DistributorRepresentativesContractService {
 
     if (!user) {
       throw new NotFoundException(
-        `Distributor representatives contract ${id} does't exist.`,
+        `Distributor Representatives Contract ${id} does't exist.`,
       );
     }
   }
