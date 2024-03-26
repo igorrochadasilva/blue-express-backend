@@ -1,6 +1,7 @@
 import {
   IsDateString,
   IsDecimal,
+  IsDefined,
   IsEmail,
   IsEnum,
   IsNumber,
@@ -16,6 +17,7 @@ import { TypeContractEnums } from '../../../enums/type-contract.enum';
 import { CompaniesEnums } from '../../../enums/companies.enum';
 import { RequestStatusEnums } from '../../../enums/request-status.enum';
 import { RequestFrequencyEnums } from '../../../enums/request-frequency.enum';
+import { ApproverEntity } from '../../approver/entity/approver.entity';
 
 export class CreateMaintenanceContractDTO {
   @IsString()
@@ -97,8 +99,10 @@ export class CreateMaintenanceContractDTO {
   justify: string;
   @IsString()
   requestId: string;
-  @IsNumber()
+  @IsDefined()
   requester: UserEntity;
+  @IsDefined()
+  currentApprover: ApproverEntity;
   @IsNumber()
   currentLevel: number;
   @IsEnum(OfficeTypeEnum)

@@ -9,6 +9,7 @@ import {
 import { Role } from '../../../enums/role.enum';
 import { ApproverEntity } from '../../approver/entity/approver.entity';
 import { MaintenanceContractEntity } from '../../maintenance-contract/entity/maintenance-contract.entity';
+import { DistributorRepresentativesContractEntity } from '../../distributor-representatives-contract/entity/distributor-representatives-contract.entity';
 
 @Entity({
   name: 'users',
@@ -65,6 +66,13 @@ export class UserEntity {
     (maintenanceContract) => maintenanceContract.requester,
   )
   maintenanceContract: MaintenanceContractEntity[];
+
+  @OneToMany(
+    () => DistributorRepresentativesContractEntity,
+    (distributorRepresentativesContract) =>
+      distributorRepresentativesContract.requester,
+  )
+  distributorRepresentativesContract: DistributorRepresentativesContractEntity[];
 
   @OneToMany(() => ApproverEntity, (approval) => approval.user)
   approvals: ApproverEntity[];

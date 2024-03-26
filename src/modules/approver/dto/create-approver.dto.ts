@@ -1,4 +1,4 @@
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { IsDefined, IsEnum, IsNumber, IsString } from 'class-validator';
 import { UserEntity } from '../../user/entity/user.entity';
 import { RequestsTypeEnums } from '../../../enums/request-types.enum';
 import { CompaniesEnums } from '../../../enums/companies.enum';
@@ -7,7 +7,7 @@ import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
 export class CreateApproverDTO {
   @IsString()
   title: string;
-  @IsNumber()
+  @IsDefined()
   user: UserEntity;
   @IsNumber()
   level: number;

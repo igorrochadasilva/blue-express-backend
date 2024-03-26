@@ -19,14 +19,6 @@ export class ApprovalService {
   ) {}
 
   async create(data: CreateApprovalDTO) {
-    // const existsApprover = await this.approverRepository.exists({
-    //   where: { level: data.level, key: data.key, user: data.user },
-    // });
-
-    // if (existsApprover) {
-    //   throw new BadRequestException('This approver already exists.');
-    // }
-
     const request = await this.approvalRepository.save(data);
 
     return request;
