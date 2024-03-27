@@ -171,6 +171,13 @@ export class DistributorRepresentativesContractEntity {
   @Column({ type: 'enum', enum: OfficeTypeEnum, nullable: false })
   approvalLevel: OfficeTypeEnum;
 
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+  })
+  author: string;
+
   @CreateDateColumn()
   createdAt?: Date;
 

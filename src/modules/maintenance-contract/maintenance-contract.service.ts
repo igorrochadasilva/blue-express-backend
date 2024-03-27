@@ -28,11 +28,7 @@ export class MaintenanceContractService {
     const requesterId: any = data.requester.id || data.requester;
     const approverId: any = data.currentApprover.id || data.currentApprover;
 
-    const requesterExists = await this.usersRepository.exists({
-      where: {
-        id: requesterId,
-      },
-    });
+    const requester = await this.usersRepository.findOneBy({ id: requesterId });
 
     const approverExists = await this.approversRepository.exists({
       where: {
@@ -40,13 +36,15 @@ export class MaintenanceContractService {
       },
     });
 
-    if (!requesterExists) {
+    if (!requester) {
       throw new BadRequestException('The requester does not exist.');
     }
 
     if (!approverExists) {
       throw new BadRequestException('The current approver does not exist.');
     }
+
+    data.author = requester.name;
 
     const request = await this.maintenanceContractRepository.save(data);
 

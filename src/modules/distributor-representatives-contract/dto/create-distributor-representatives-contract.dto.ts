@@ -103,4 +103,11 @@ export class CreateDistributorRepresentativesContractDTO {
 
   @IsEnum(OfficeTypeEnum)
   approvalLevel: OfficeTypeEnum;
+
+  @IsString()
+  @IsOptional()
+  author: string;
+
+  @IsEnum(TypeRequestOrderEnum)
+  typeRequestOrder: TypeRequestOrderEnum;
 }

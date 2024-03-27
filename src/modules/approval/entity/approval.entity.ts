@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { UserEntity } from '../../user/entity/user.entity';
 import { RequestStatusEnums } from '../../../enums/request-status.enum';
+import { RequestsTypeEnums } from '../../../enums/request-types.enum';
 
 @Entity({
   name: 'approvals',
@@ -34,8 +35,8 @@ export class ApprovalEntity {
   @Column({ type: 'varchar', nullable: false })
   justify: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  typeRequest: string;
+  @Column({ type: 'enum', enum: RequestsTypeEnums, nullable: false })
+  typeRequest: RequestsTypeEnums;
 
   @CreateDateColumn()
   createdAt?: Date;

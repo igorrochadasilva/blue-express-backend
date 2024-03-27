@@ -1,6 +1,6 @@
 import { IsDefined, IsEnum, IsNumber, IsString } from 'class-validator';
 import { UserEntity } from '../../user/entity/user.entity';
-import { RequestsTypeEnums } from '../../../enums/request-types.enum';
+import { RequestsTypeAcronymEnums } from '../../../enums/request-types-acronym.enum';
 import { CompaniesEnums } from '../../../enums/companies.enum';
 import { OfficeTypeEnum } from '../../../enums/approver-level.enum';
 
@@ -11,8 +11,8 @@ export class CreateApproverDTO {
   user: UserEntity;
   @IsNumber()
   level: number;
-  @IsEnum(RequestsTypeEnums)
-  key: RequestsTypeEnums;
+  @IsEnum(RequestsTypeAcronymEnums)
+  key: RequestsTypeAcronymEnums;
   @IsEnum(CompaniesEnums)
   company: CompaniesEnums;
   @IsEnum(OfficeTypeEnum)
