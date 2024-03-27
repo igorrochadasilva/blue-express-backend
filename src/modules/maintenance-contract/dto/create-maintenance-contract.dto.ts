@@ -122,4 +122,7 @@ export class CreateMaintenanceContractDTO {
   @IsString()
   @IsOptional()
   sap: string;
+  @IsString()
+  @IsOptional()
+  author: string;
 }

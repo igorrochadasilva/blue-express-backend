@@ -219,6 +219,13 @@ export class SoftwareServiceContractEntity {
   })
   sap: string;
 
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
+  author: string;
+
   @CreateDateColumn()
   createdAt?: Date;
 

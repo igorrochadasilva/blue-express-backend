@@ -147,4 +147,8 @@ export class CreateSoftwareServiceContractDTO {
   @IsString()
   @IsOptional()
   sap: string;
+
+  @IsString()
+  @IsOptional()
+  author: string;
 }
