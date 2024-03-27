@@ -13,12 +13,19 @@ import { DistributorRepresentativesContractModule } from './modules/distributor-
 import { SoftwareServiceContractModule } from './modules/software-service-contract/software-service-contract.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { mailerConfig } from './email/mailer-source';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: process.env.ENV === 'test' ? '.env.test' : '.env',
     }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 1000,
+        limit: 1,
+      },
+    ]),
     forwardRef(() => UserModule),
     forwardRef(() => AuthModule),
     forwardRef(() => ApproverModule),
@@ -26,7 +33,6 @@ import { mailerConfig } from './email/mailer-source';
     forwardRef(() => DistributorRepresentativesContractModule),
     forwardRef(() => SoftwareServiceContractModule),
     forwardRef(() => ApprovalModule),
-    //MailerModule used to send email
     MailerModule.forRoot(mailerConfig),
     TypeOrmModule.forRoot(typeOrmConfig),
   ],

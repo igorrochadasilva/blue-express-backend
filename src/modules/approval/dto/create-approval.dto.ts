@@ -1,4 +1,10 @@
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import {
+  IsDefined,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { UserEntity } from '../../user/entity/user.entity';
 import { RequestStatusEnums } from '../../../enums/request-status.enum';
 import { RequestsTypeEnums } from '../../../enums/request-types.enum';
@@ -10,7 +16,7 @@ export class CreateApprovalDTO {
   @IsNumber()
   level: number;
 
-  @IsNumber()
+  @IsDefined()
   user: UserEntity;
 
   @IsString()
@@ -25,6 +31,6 @@ export class CreateApprovalDTO {
   @IsEnum(RequestsTypeEnums)
   typeRequest: RequestsTypeEnums;
 
-  @IsString()
+  @IsOptional()
   author: string;
 }

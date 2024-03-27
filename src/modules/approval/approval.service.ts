@@ -10,15 +10,29 @@ import { ApprovalEntity } from './entity/approval.entity';
 import { CreateApprovalDTO } from './dto/create-approval.dto';
 import { UpdatePutApprovalDTO } from './dto/update-put-approval.dto';
 import { UpdatePatchApprovalDTO } from './dto/update-patch-approval.dto';
+import { RequestsTypeEnums } from '../../enums/request-types.enum';
+import { ApproverEntity } from '../approver/entity/approver.entity';
 
 @Injectable()
 export class ApprovalService {
   constructor(
     @InjectRepository(ApprovalEntity)
     private approvalRepository: Repository<ApprovalEntity>,
+    @InjectRepository(ApproverEntity)
+    private approversRepository: Repository<ApproverEntity>,
   ) {}
 
   async create(data: CreateApprovalDTO) {
+    const approverId: any = data.user.id || data.user;
+
+    const approver = await this.approversRepository.findOneBy({
+      id: approverId,
+    });
+
+    if (!approver) {
+      throw new BadRequestException('The approver does not exist.');
+    }
+
     const request = await this.approvalRepository.save(data);
 
     return request;
