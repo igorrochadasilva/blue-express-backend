@@ -14,6 +14,7 @@ import { SoftwareServiceContractModule } from './modules/software-service-contra
 import { MailerModule } from '@nestjs-modules/mailer';
 import { mailerConfig } from './email/mailer-source';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -35,6 +36,10 @@ import { ThrottlerModule } from '@nestjs/throttler';
     forwardRef(() => ApprovalModule),
     MailerModule.forRoot(mailerConfig),
     TypeOrmModule.forRoot(typeOrmConfig),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    forwardRef(() => UploadModule),
   ],
   controllers: [AppController],
   providers: [AppService],

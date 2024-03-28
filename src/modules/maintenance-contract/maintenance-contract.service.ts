@@ -25,6 +25,7 @@ export class MaintenanceContractService {
   ) {}
 
   async create(data: CreateMaintenanceContractDTO) {
+    console.log('🚀 ~ MaintenanceContractService ~ create ~ data:', data);
     const requesterId: any = data.requester.id || data.requester;
     const approverId: any = data.currentApprover.id || data.currentApprover;
 

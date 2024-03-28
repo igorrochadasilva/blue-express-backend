@@ -2,11 +2,16 @@ import {
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
+  MaxFileSizeValidator,
+  ParseFilePipe,
   Patch,
   Post,
   Put,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ParamId } from '../../decorators/param-id-decorator';
 import { AuthGuard } from '../../guards/auth.guard';
@@ -14,6 +19,7 @@ import { MaintenanceContractService } from './maintenance-contract.service';
 import { CreateMaintenanceContractDTO } from './dto/create-maintenance-contract.dto';
 import { UpdatePutMaintenanceContractDTO } from './dto/update-put-maintenance-contract.dto';
 import { UpdatePatchMaintenanceContractDTO } from './dto/update-patch-maintenance-contract.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 //@UseGuards(AuthGuard)
 @Controller('request/maintenance-contract')
@@ -22,6 +28,7 @@ export class MaintenanceContractController {
     private readonly maintenanceContractServiceService: MaintenanceContractService,
   ) {}
 
+  @UseInterceptors(FileInterceptor('file'))
   @Post()
   async create(@Body() data: CreateMaintenanceContractDTO) {
     return this.maintenanceContractServiceService.create(data);
